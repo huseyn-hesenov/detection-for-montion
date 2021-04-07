@@ -1,7 +1,7 @@
 import cv2
 from tracker import *
 import dronekit
-import pymavlink
+
 
 # Create tracker object
 tracker = EuclideanDistTracker()
@@ -28,7 +28,7 @@ while True:
     for cnt in contours:
         # Calculate area and remove small elements
         area = cv2.contourArea(cnt)
-        if area > 9000:
+        if area > 20000:
             #cv2.drawContours(roi, [cnt], -1, (0, 255, 0), 2)
             x, y, w, h = cv2.boundingRect(cnt)
 
@@ -42,7 +42,7 @@ while True:
         cv2.putText(roi, str(id), (x, y - 15), cv2.FONT_HERSHEY_PLAIN, 2, (255, 0, 0), 2)
         cv2.rectangle(roi, (x, y), (x + w, y + h), (0, 255, 0), 3)
 
-    cv2.imshow("roi", roi)
+    #cv2.imshow("roi", roi)
     cv2.imshow("Frame", frame)
     cv2.imshow("Mask", mask)
 
